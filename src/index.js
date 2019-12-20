@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { Router, Switch } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import  createHashHistory  from './history';
+import configureStore from './store';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
+const routes = require('./routes').default;
+ReactDOM.render(
+    <div>
+        <Provider store={store}>
+            <Router history={createHashHistory}>
+                <Switch>{renderRoutes(routes)}</Switch>
+            </Router>
+        </Provider>
+    </div>,
+    document.getElementById('root')
+);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
