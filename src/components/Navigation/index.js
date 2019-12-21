@@ -53,7 +53,7 @@ class Navigation extends BaseComponent {
                     <ul className={classes.barMenu}>
                         <li><Link to="/">主页</Link></li>
                         <li><Link to="/music">音乐</Link></li>
-                        <li><Link to="/">关于</Link></li>
+                        <li><Link to="/about">关于</Link></li>
                     </ul>
                 </div>
                 <LoadingBar/>

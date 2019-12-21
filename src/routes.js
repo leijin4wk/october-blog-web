@@ -8,6 +8,9 @@ const ArticleDetailPageComponent = loadable(() =>
 const MusicPageComponent = loadable(() =>
 	import('./routes/MusicPage')
 );
+const AboutPage = loadable(() =>
+	import('./routes/AboutPage')
+);
 
 const routes = [
 	{
@@ -23,6 +26,10 @@ const routes = [
 	{
 		path: '/music',
 		component: MusicPageComponent,
+		exact: true
+	},{
+		path: '/about',
+		component: AboutPage,
 		exact: true
 	}
 ];
