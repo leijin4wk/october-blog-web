@@ -1,17 +1,20 @@
 import LoadingBar from "react-redux-loading-bar";
 import React from 'react';
 import BaseComponent from '../BaseComponent'
+import {withRouter} from 'react-router-dom' //引入withRouter
 import injectStyle from 'react-jss'
 import logo from "../../assets/logo.png"
+
 class Navigation extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            navTransform: {
-            }
+            navTransform: {}
         }
     }
-
+    onClickLink=(value)=>{
+        this.props.history.replace(value);
+    };
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
     }
@@ -28,7 +31,7 @@ class Navigation extends BaseComponent {
                     transitionDelay: "0s"
                 }
             })
-        }else if(scrollTop < 120){
+        } else if (scrollTop < 120) {
             this.setState({
                 navTransform: {
                     transform: "translateY(0)",
@@ -45,15 +48,23 @@ class Navigation extends BaseComponent {
         let {classes} = this.props;
         return (
             <nav className={classes.nav} style={{...this.state.navTransform}}>
-                <LoadingBar style={{ backgroundColor: '#1D7FD8', height: '3px' }}/>
+                <LoadingBar style={{backgroundColor: '#1D7FD8', height: '3px'}}/>
                 <div className={classes.bar}>
-                    <div className={classes.logo}>
-                        <img  className={classes.logoHover} alt={"logo"} src={logo} height={45}></img>
+                    <div className={classes.logo} onClick={() => {
+                        this.onClickLink("/")
+                    }}>
+                        <img className={classes.logoHover} alt={"logo"} src={logo} height={45}></img>
                     </div>
                     <ul className={classes.barMenu}>
-                        <li><span className={classes.linkHover} to="/">主页</span></li>
-                        <li><span className={classes.linkHover} to="/music">音乐</span></li>
-                        <li><span className={classes.linkHover} to="/about">关于</span></li>
+                        <li><span onClick={() => {
+                            this.onClickLink("/")
+                        }} className={classes.linkHover}>主页</span></li>
+                        <li><span onClick={() => {
+                            this.onClickLink("/music")
+                        }} className={classes.linkHover}>音乐</span></li>
+                        <li><span onClick={() => {
+                            this.onClickLink("/about")
+                        }} className={classes.linkHover}>关于</span></li>
                     </ul>
                 </div>
 
@@ -81,24 +92,24 @@ const styles = {
             fontWeight: 800
         }
     },
-    logo:{
+    logo: {
         margin: [5, 10]
     },
     barMenu: {
         listStyle: "none",
         '& li': {
             display: "inline",
-            margin: [0,5]
+            margin: [0, 5]
         }
     },
-    logoHover:{
+    logoHover: {
         '&:hover': {
             cursor: "pointer"
         }
     },
 
-    linkHover:{
-        padding:[0,10],
+    linkHover: {
+        padding: [0, 10],
         borderWidth: 1,
         borderStyle: "solid",
         borderColor: "transparent",
@@ -111,4 +122,4 @@ const styles = {
     }
 };
 
-export default injectStyle(styles)(Navigation)
+export default withRouter(injectStyle(styles)(Navigation))
