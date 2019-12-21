@@ -20,7 +20,6 @@ HomeHeader.propTypes = {
 };
 const styles = {
     header: {
-        marginTop:60,
         height:400,
         display:"flex",
         flexDirection:'row',
