@@ -48,7 +48,7 @@ class Navigation extends BaseComponent {
             <nav className={classes.nav} style={{...this.state.navTransform}}>
                 <div className={classes.bar}>
                     <div className={classes.logo}>
-                        <a href="/" className="luxbar-brand">Oct</a>
+                        <a href="/" className="luxbar-brand">Oct 十月</a>
                     </div>
                     <ul className={classes.barMenu}>
                         <li><Link to="/">主页</Link></li>
