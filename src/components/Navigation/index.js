@@ -3,7 +3,7 @@ import LoadingBar from "react-redux-loading-bar";
 import React from 'react';
 import BaseComponent from '../BaseComponent'
 import injectStyle from 'react-jss'
-import logo from "../../assets/logo.png"
+import oct from "../../assets/oct.png"
 class Navigation extends BaseComponent {
     constructor(props) {
         super(props);
@@ -49,8 +49,7 @@ class Navigation extends BaseComponent {
                 <div className={classes.bar}>
                     <div className={classes.logo}>
                         <Link to={"/"} className="luxbar-brand">
-                            oct
-                            {/*<img alt={"logo"} src={logo} height={60}></img>*/}
+                            <img alt={"logo"} src={oct} height={60}></img>
                         </Link>
                     </div>
                     <ul className={classes.barMenu}>
@@ -75,7 +74,7 @@ const styles = {
     },
     bar: {
         display: "flex",
-        backgroundColor: "#4d9897",
+        backgroundColor: "#F5F5DC",
         justifyContent: "space-between",
         flexDirection: "row",
         '& a': {
