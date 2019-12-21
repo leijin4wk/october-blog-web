@@ -1,9 +1,9 @@
 export const indexActions = {
     INDEX_LOAD_DATA: 'INDEX_LOAD_DATA',
     INDEX_DATA_UPDATE: "INDEX_DATA_UPDATE",
-    loadData: () => ({
+    loadData: (data) => ({
         type: indexActions.INDEX_LOAD_DATA,
-        payload: {}
+        payload:data
     }),
     dataUpdate: (data) => ({
         type: indexActions.INDEX_DATA_UPDATE,

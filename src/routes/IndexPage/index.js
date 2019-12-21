@@ -11,17 +11,17 @@ import Pager from "../../components/Pager";
 
 class IndexPage extends Component {
     componentDidMount() {
-        this.props.loadData();
+        this.props.loadData({});
     }
 
     onClickCategoryItem=(categoryId)=>{
-        console.log(categoryId);
+        this.props.loadData({categoryId:categoryId});
     };
-    onChangePage=(value)=>{
-
+    onChangePage=(pageNum)=>{
+        this.props.loadData({pageNum:pageNum});
     };
     render() {
-        let {classes, articleList, categoryList} = this.props;
+        let {classes, articleList, categoryList,pageNum,totalPages,total} = this.props;
         return (
             <div className={classes.mainBackground}>
                 <Navigation/>
@@ -33,9 +33,9 @@ class IndexPage extends Component {
                                 return <ArticleItem key={item.id} item={item}/>
                             })
                         }
-                        <Pager pageNum={0} pageTotal={10} onChangePage={(value)=>{
+                        <Pager pageNum={pageNum} totalPages={totalPages} total={total} onChangePage={(value)=>{
                             this.onChangePage(value)
-                        }}></Pager>
+                        }}/>
                     </div>
                     <div className={classes.mainRight}>
                         <section>
@@ -60,7 +60,12 @@ class IndexPage extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         articleList: state.index.articleList,
-        categoryList: state.index.categoryList
+        categoryList: state.index.categoryList,
+        pageNum: state.index.pageNum,
+        pageSize:state.index.pageSize,
+        categoryId:state.index.categoryId,
+        totalPages:state.index.totalPages,
+        total:state.index.total,
     }
 };
 

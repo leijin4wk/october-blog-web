@@ -4,6 +4,8 @@ import { indexActions } from './action';
 export const indexState = new Record({
     pageNum:0,
     pageSize:10,
+    totalPages:0,
+    total:0,
     categoryId:"",
     articleList:[],
     categoryList:[]

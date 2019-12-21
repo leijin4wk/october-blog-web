@@ -8,17 +8,26 @@ class Pager extends Component {
     onClickPage = (value) => {
         this.props.onChangePage(value)
     };
+
     render() {
-        let {classes} = this.props;
+        let {classes, pageNum, totalPages} = this.props;
         return (
             <div className={classes.pager}>
-                <div className={classes.pagerItem} onClick={() => {
-                    this.onClickPage(0)
-                }}>
-                    <img src={previousImage} width={60}></img></div>
-                <div className={classes.pagerItem} onClick={() => {
-                    this.onClickPage(1)
-                }}><img src={nextImage} width={60}></img></div>
+                <div>
+                    {pageNum - 1 >= 0 ?
+                        <div className={classes.pagerItem} onClick={() => {
+                            this.onClickPage(pageNum - 1)
+                        }}>
+                            <img alt={"previous"} src={previousImage} width={60}></img></div> : null
+                    }
+                </div>
+                <div>
+                    {pageNum + 1 < totalPages ?
+                        <div className={classes.pagerItem} onClick={() => {
+                            this.onClickPage(pageNum + 1)
+                        }}><img alt={"next"} src={nextImage} width={60}></img></div> : null
+                    }
+                </div>
             </div>
         );
     }
@@ -26,7 +35,8 @@ class Pager extends Component {
 
 Pager.propTypes = {
     pageNum: PropTypes.number,
-    pageTotal: PropTypes.number,
+    totalPages: PropTypes.number,
+    total: PropTypes.number,
     onChangePage: PropTypes.func
 };
 const styles = {

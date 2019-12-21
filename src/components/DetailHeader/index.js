@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom'
 import banner from "../../assets/banner1.jpg"
 import moment from "moment";
 class DetailHeader extends Component {
@@ -13,7 +12,7 @@ class DetailHeader extends Component {
         return (
             <header style={{backgroundImage:`url(${banner})`,  backgroundSize: "cover"}} className={classes.header}>
                 <div className={classes.titleName}>
-                    <div className={classes.titleItem}><Link className={classes.titleCategory}>{item.categoryName}</Link></div>
+                    <div className={classes.titleItem}><span className={classes.titleCategory}>{item.categoryName}</span></div>
                     <h1 className={classes.titleItem}>{item.title}</h1>
                     <div className={classes.titleItem}>{this.formatData(item.createTime)}</div>
                 </div>
@@ -45,10 +44,7 @@ const styles = {
         borderStyle: "solid",
         borderWidth: 1,
         borderRadius: 999,
-        textDecoration: "none",
-        '&:hover': {
-            color:"#0052ac",
-        }
+        textDecoration: "none"
     }
 };
 export default injectStyle(styles)(DetailHeader)

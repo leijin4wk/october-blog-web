@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
-import React, {Component} from 'react';
+import React from 'react';
+import BaseComponent from '../BaseComponent'
 import injectStyle from 'react-jss'
 
-class Navigation extends Component {
+class Navigation extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,10 +44,8 @@ class Navigation extends Component {
 
     render() {
         let {classes} = this.props;
-        console.log({...this.state.navTransform});
         return (
             <nav className={classes.nav} style={{...this.state.navTransform}}>
-                <LoadingBar/>
                 <div className={classes.bar}>
                     <div className={classes.logo}>
                         <a href="/" className="luxbar-brand">Oct</a>
@@ -57,6 +56,7 @@ class Navigation extends Component {
                         <li><Link to="/">关于</Link></li>
                     </ul>
                 </div>
+                <LoadingBar/>
             </nav>
         );
     }
