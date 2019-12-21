@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import PropTypes from 'prop-types';
-import banner from "../../assets/banner1.jpg"
+import banner from "../../assets/banner.jpg"
 import moment from "moment";
 class DetailHeader extends Component {
     formatData = (data) => {

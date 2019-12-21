@@ -1,9 +1,8 @@
-import {Link} from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import React from 'react';
 import BaseComponent from '../BaseComponent'
 import injectStyle from 'react-jss'
-import oct from "../../assets/oct.png"
+import logo from "../../assets/logo.png"
 class Navigation extends BaseComponent {
     constructor(props) {
         super(props);
@@ -48,14 +47,12 @@ class Navigation extends BaseComponent {
             <nav className={classes.nav} style={{...this.state.navTransform}}>
                 <div className={classes.bar}>
                     <div className={classes.logo}>
-                        <Link to={"/"} className="luxbar-brand">
-                            <img alt={"logo"} src={oct} height={60}></img>
-                        </Link>
+                        <img  className={classes.logoHover} alt={"logo"} src={logo} height={45}></img>
                     </div>
                     <ul className={classes.barMenu}>
-                        <li><Link to="/">主页</Link></li>
-                        <li><Link to="/music">音乐</Link></li>
-                        <li><Link to="/about">关于</Link></li>
+                        <li><span className={classes.linkHover} to="/">主页</span></li>
+                        <li><span className={classes.linkHover} to="/music">音乐</span></li>
+                        <li><span className={classes.linkHover} to="/about">关于</span></li>
                     </ul>
                 </div>
                 <LoadingBar/>
@@ -76,22 +73,39 @@ const styles = {
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "row",
-        '& a': {
+        '& span': {
             fontSize: "20px",
             color: "#1D7FD8",
             lineHeight: "60px",
-            fontWeight: 800,
-            textDecoration: "none"
+            fontWeight: 800
         }
     },
-    logo: {
-        margin: [0, 10]
+    logo:{
+        margin: [5, 10]
     },
     barMenu: {
         listStyle: "none",
         '& li': {
             display: "inline",
-            margin: [0, 10]
+            margin: [0,5]
+        }
+    },
+    logoHover:{
+        '&:hover': {
+            cursor: "pointer"
+        }
+    },
+
+    linkHover:{
+        padding:[0,10],
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "transparent",
+        '&:hover': {
+            cursor: "pointer",
+            borderStyle: "solid",
+            borderWidth: 1,
+            borderColor: "#a3a3a3"
         }
     }
 };

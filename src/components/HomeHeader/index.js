@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
-import banner from "../../assets/banner1.jpg"
+import banner from "../../assets/banner.jpg"
 import PropTypes from "prop-types";
 class HomeHeader extends Component {
     render() {
