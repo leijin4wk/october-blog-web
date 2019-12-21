@@ -45,6 +45,7 @@ class Navigation extends BaseComponent {
         let {classes} = this.props;
         return (
             <nav className={classes.nav} style={{...this.state.navTransform}}>
+                <LoadingBar style={{ backgroundColor: '#1D7FD8', height: '3px' }}/>
                 <div className={classes.bar}>
                     <div className={classes.logo}>
                         <img  className={classes.logoHover} alt={"logo"} src={logo} height={45}></img>
@@ -55,7 +56,7 @@ class Navigation extends BaseComponent {
                         <li><span className={classes.linkHover} to="/about">关于</span></li>
                     </ul>
                 </div>
-                <LoadingBar/>
+
             </nav>
         );
     }
