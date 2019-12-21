@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import banner from "../../assets/banner1.jpg"
+import PropTypes from "prop-types";
 class HomeHeader extends Component {
     render() {
-        let {classes} = this.props;
+        let {classes,item} = this.props;
         return (
             <header style={{backgroundImage:`url(${banner})`,  backgroundSize: "cover"}} className={classes.header}>
                 <div className={classes.titleName}>
-                    <h1 className={classes.titleItem}>TTTTTT</h1>
-                    <div className={classes.titleItem}>aaaaa</div>
+                    <h1 className={classes.titleItem}>{item.name}</h1>
+                    <div className={classes.titleItem}>{item.description}</div>
                 </div>
             </header>
         );
     }
 }
+HomeHeader.propTypes = {
+    item: PropTypes.object
+};
 const styles = {
     header: {
         marginTop:60,

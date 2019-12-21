@@ -10,22 +10,32 @@ import Navigation from "../../components/Navigation";
 import Pager from "../../components/Pager";
 
 class IndexPage extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+           titleObj:{
+               name:"aaaa",
+               description:"cccc"
+
+           }
+        }
+    }
     componentDidMount() {
         this.props.loadData({});
     }
 
     onClickCategoryItem=(categoryId)=>{
-        this.props.loadData({categoryId:categoryId});
+        this.props.loadData({categoryId:categoryId,pageNum:0});
     };
     onChangePage=(pageNum)=>{
-        this.props.loadData({pageNum:pageNum});
+        this.props.loadData({pageNum:pageNum,categoryId:""});
     };
     render() {
         let {classes, articleList, categoryList,pageNum,totalPages,total} = this.props;
         return (
             <div className={classes.mainBackground}>
                 <Navigation/>
-                <HomeHeader/>
+                <HomeHeader item={this.state.titleObj}/>
                 <div className={classes.mainWrap}>
                     <div className={classes.mainLeft}>
                         {

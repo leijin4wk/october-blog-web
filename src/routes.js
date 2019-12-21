@@ -5,6 +5,10 @@ const IndexPageComponent = loadable(() =>
 const ArticleDetailPageComponent = loadable(() =>
 	import('./routes/ArticleDetailPage')
 );
+const MusicPageComponent = loadable(() =>
+	import('./routes/MusicPage')
+);
+
 const routes = [
 	{
 		path: '/',
@@ -14,6 +18,11 @@ const routes = [
 	{
 		path: '/article/:id',
 		component: ArticleDetailPageComponent,
+		exact: true
+	},
+	{
+		path: '/music',
+		component: MusicPageComponent,
 		exact: true
 	}
 ];

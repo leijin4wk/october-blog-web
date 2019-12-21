@@ -10,11 +10,11 @@ class Pager extends Component {
     };
 
     render() {
-        let {classes, pageNum, totalPages} = this.props;
+        let {classes, pageNum, totalPages,total} = this.props;
         return (
             <div className={classes.pager}>
                 <div>
-                    {pageNum - 1 >= 0 ?
+                    {pageNum - 1 >= 0 &&total>0?
                         <div className={classes.pagerItem} onClick={() => {
                             this.onClickPage(pageNum - 1)
                         }}>
@@ -22,7 +22,7 @@ class Pager extends Component {
                     }
                 </div>
                 <div>
-                    {pageNum + 1 < totalPages ?
+                    {pageNum + 1 < totalPages&&total>0?
                         <div className={classes.pagerItem} onClick={() => {
                             this.onClickPage(pageNum + 1)
                         }}><img alt={"next"} src={nextImage} width={60}></img></div> : null
