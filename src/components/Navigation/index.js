@@ -74,12 +74,11 @@ const styles = {
     },
     bar: {
         display: "flex",
-        backgroundColor: "#F5F5DC",
         justifyContent: "space-between",
         flexDirection: "row",
         '& a': {
             fontSize: "20px",
-            color: "#FFFFFF",
+            color: "#1D7FD8",
             lineHeight: "60px",
             fontWeight: 800,
             textDecoration: "none"
