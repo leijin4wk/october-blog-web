@@ -5,6 +5,7 @@ import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import HomeHeader from "../../components/HomeHeader";
 import MusicPlayer from "../../components/MusicPlayer";
+import {musicActions} from "../../models/music/action";
 class MusicPage extends Component {
     constructor(props){
         super(props);
@@ -16,14 +17,18 @@ class MusicPage extends Component {
             }
         }
     }
+    componentDidMount() {
+        this.props.loadLikeMusicList({});
+
+    }
     render() {
-        let {classes} = this.props;
+        let {classes,likeList,currentPlayItem} = this.props;
         return (
             <div className={classes.mainBackground}>
                 <Navigation/>
                 <HomeHeader item={this.state.titleObj}/>
                 <div className={classes.mainContent}>
-                    <MusicPlayer/>
+                    <MusicPlayer songList={likeList} currentPlayItem={currentPlayItem}/>
                 </div>
                 <Footer/>
             </div>
@@ -51,12 +56,14 @@ const styles = {
 };
 const mapStateToProps = (state, ownProps) => {
     return {
-
+        likeList: state.music.likeList,
+        currentPlayItem: state.music.currentPlayItem,
     }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        loadLikeMusicList:() => dispatch(musicActions.loadLikeList()),
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(injectStyle(styles)(MusicPage))

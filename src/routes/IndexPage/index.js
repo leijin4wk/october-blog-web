@@ -81,7 +81,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        loadData: (...args) => dispatch(indexActions.loadData(...args)),
+        loadData: (...args) => dispatch(indexActions.loadData(...args))
     }
 };
 const styles = {

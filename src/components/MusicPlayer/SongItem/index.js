@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import palyBtn from '../../../assets/play.png'
+import PropTypes from "prop-types";
 
 class SongItem extends Component {
     render() {
-        let {classes} = this.props;
+        let {classes,songItem} = this.props;
         return (
             <div className={classes.songItemStyle}>
                 <div className={classes.songNameStyle}>
-                    <span>成都</span><img width={40} src={palyBtn}/>
+                    <span>{songItem.name}</span><img width={40} alt={"a"} src={palyBtn}/>
                 </div>
                 <div className={classes.songNameStyle}>
-                    <span>赵雷</span>
+                    <span>{songItem.arName}</span>
                 </div>
             </div>
         );
     }
 }
-
+SongItem.propTypes = {
+    songItem: PropTypes.object
+};
 const styles = {
     songItemStyle: {
         display: "flex",

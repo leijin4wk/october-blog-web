@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import SongItem from "./SongItem";
 import songbg from "../../assets/songbg.png";
+import PropTypes from "prop-types";
 
 class MusicPlayer extends Component {
     render() {
-        let {classes} = this.props;
+        let {classes,songList,currentPlayItem} = this.props;
         return (
             <div className={classes.mainPanel}>
                 <div className={classes.musicListStyle}>
@@ -18,18 +19,19 @@ class MusicPlayer extends Component {
                         </div>
                     </div>
                     <hr/>
-                    <SongItem/>
-                    <hr/>
-                    <SongItem/>
-                    <hr/>
+                    {
+                        songList.map(item=>{
+                           return  <SongItem key={item.id} songItem={item}/>
+                        })
+                    }
                 </div>
                 <div className={classes.player}>
                     <div className={classes.cover}>
                         <div className={classes.imgContainer}
                              style={{backgroundImage: `url(${songbg})`, backgroundSize: " 100% 100%"}}>
                             <div className={classes.imgWrapper}>
-                                <img className={classes.imageStyle}
-                                     src={"http://singerimg.kugou.com/uploadpic/softhead/400/20161226/20161226105135733.jpg"}/>
+                                <img className={classes.imageStyle} alt={"歌手"}
+                                     src={currentPlayItem.picUrl+"?param=200y200"}/>
                             </div>
                         </div>
                     </div>
@@ -46,7 +48,10 @@ class MusicPlayer extends Component {
         );
     }
 }
-
+MusicPlayer.propTypes = {
+    songList: PropTypes.array,
+    currentPlayItem:PropTypes.object,
+};
 const styles = {
     mainPanel: {
         width: "100%",
@@ -109,12 +114,19 @@ const styles = {
         animationDelay:"1s",
         animationIterationCount:"infinite",
     },
+    process:{
+        display: "flex",
+        justifyContent: "center",
+    },
+    controlBtn: {
+        width: "60%",
+        display: "flex",
+        justifyContent: "space-around",
+        margin: [10,0]
+    },
     lyricList: {
         display: "flex",
         justifyContent: "center"
-    },
-    controlBtn: {
-        display: "flex",
     }
 };
 export default injectStyle(styles)(MusicPlayer)
