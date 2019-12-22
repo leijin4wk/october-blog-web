@@ -25,9 +25,10 @@ class MusicPlayer extends Component {
                 </div>
                 <div className={classes.player}>
                     <div className={classes.cover}>
-                        <div className={classes.imgContainer} style={{backgroundImage: `url(${songbg})`, backgroundSize: " 100% 100%"}}>
+                        <div className={classes.imgContainer}
+                             style={{backgroundImage: `url(${songbg})`, backgroundSize: " 100% 100%"}}>
                             <div className={classes.imgWrapper}>
-                                <img width={100}
+                                <img className={classes.imageStyle}
                                      src={"http://singerimg.kugou.com/uploadpic/softhead/400/20161226/20161226105135733.jpg"}/>
                             </div>
                         </div>
@@ -72,24 +73,41 @@ const styles = {
         display: "flex",
         justifyContent: "center",
     },
-    imgContainer:{
+    imgContainer: {
+        borderWidth: 5,
+        borderStyle: "solid",
+        borderRadius: "50%",
+        borderColor: "blue",
         display: "flex",
         width: 240,
-        height:240,
+        height: 240,
         justifyContent: "center",
         alignItems: "center",
-        borderWidth:5,
-        borderStyle:"solid",
+    },
+    imageStyle: {
+        width: 100,
+        height: 100,
+        borderWidth: 5,
+        borderStyle: "solid",
         borderRadius: "50%",
-        borderColor:"blue"
+        borderColor: "blue"
+    },
+    '@keyframes rotation': {
+        from: {
+            transform: "rotate(0deg)",
+            WebkitTransform:"rotate(0deg)"
+        },
+        to: {
+            transform: "rotate(359deg)",
+            WebkitTransform:"rotate(359deg)"
+        }
     },
     imgWrapper: {
-        borderWidth:2,
-        borderStyle:"solid",
-        borderRadius: "50%",
-        borderColor:"blue",
-        animation: "rotation 30s linear 1s infinite",
-        transform: "rotate(360deg)"
+        animationName:"$rotation",
+        animationDuration:"30s",
+        animationTimingFunction:"linear",
+        animationDelay:"1s",
+        animationIterationCount:"infinite",
     },
     lyricList: {
         display: "flex",
