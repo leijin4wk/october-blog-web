@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import SongItem from "./SongItem";
+import songbg from "../../assets/songbg.png";
 
 class MusicPlayer extends Component {
     render() {
@@ -23,11 +24,20 @@ class MusicPlayer extends Component {
                     <hr/>
                 </div>
                 <div className={classes.player}>
-                    <div className={classes.cover}><img width={100} src={"http://singerimg.kugou.com/uploadpic/softhead/400/20161226/20161226105135733.jpg"}/></div>
+                    <div className={classes.cover}>
+                        <div className={classes.imgContainer} style={{backgroundImage: `url(${songbg})`, backgroundSize: " 100% 100%"}}>
+                            <div className={classes.imgWrapper}>
+                                <img width={100}
+                                     src={"http://singerimg.kugou.com/uploadpic/softhead/400/20161226/20161226105135733.jpg"}/>
+                            </div>
+                        </div>
+                    </div>
                     <div className={classes.process}>
-                        <div className={classes.controlBtn}>a</div>
-                        <div className={classes.processBox}>b</div>
-                        <div className={classes.musicVol}>c</div>
+                        <div className={classes.controlBtn}>
+                            <div>上一曲</div>
+                            <div>播放</div>
+                            <div>下一曲</div>
+                        </div>
                     </div>
                     <div className={classes.lyricList}> lyric</div>
                 </div>
@@ -48,36 +58,45 @@ const styles = {
             listStyleType: "none"
         }
     },
-    player: {
-        width: "60%",
-    },
     listTitle: {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
         margin: [10, 0]
     },
-    cover:{
+    player: {
+        width: "60%",
+    },
+    cover: {
+        width: "100%",
         display: "flex",
-        justifyContent:"center"
+        justifyContent: "center",
     },
-    process:{
+    imgContainer:{
         display: "flex",
-        flexDirection:"row",
-        justifyContent:"space-around"
+        width: 240,
+        height:240,
+        justifyContent: "center",
+        alignItems: "center",
+        borderWidth:5,
+        borderStyle:"solid",
+        borderRadius: "50%",
+        borderColor:"blue"
     },
-    lyricList:{
+    imgWrapper: {
+        borderWidth:2,
+        borderStyle:"solid",
+        borderRadius: "50%",
+        borderColor:"blue",
+        animation: "rotation 30s linear 1s infinite",
+        transform: "rotate(360deg)"
+    },
+    lyricList: {
         display: "flex",
-        justifyContent:"center"
+        justifyContent: "center"
     },
-    controlBtn:{
-
-    },
-    processBox:{
-
-    },
-    musicVol:{
-
-    },
+    controlBtn: {
+        display: "flex",
+    }
 };
 export default injectStyle(styles)(MusicPlayer)
