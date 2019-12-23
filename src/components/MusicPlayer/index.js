@@ -92,6 +92,7 @@ const styles = {
     imageStyle: {
         width: 100,
         height: 100,
+        objectFit: "none",
         borderWidth: 5,
         borderStyle: "solid",
         borderRadius: "50%",
