@@ -13,13 +13,11 @@ class MusicPage extends Component {
             titleObj:{
                 name:"音乐",
                 description:"cccc"
-
             }
         }
     }
     componentDidMount() {
         this.props.loadLikeMusicList({});
-
     }
     render() {
         let {classes,likeList,currentPlayItem} = this.props;
@@ -28,7 +26,7 @@ class MusicPage extends Component {
                 <Navigation/>
                 <HomeHeader item={this.state.titleObj}/>
                 <div className={classes.mainContent}>
-                    <MusicPlayer songList={likeList} currentPlayItem={currentPlayItem}/>
+                    <MusicPlayer songList={likeList} currentPlayItem={currentPlayItem} onPlayMusic={this.props.payMusic} />
                 </div>
                 <Footer/>
             </div>
@@ -64,6 +62,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         loadLikeMusicList:() => dispatch(musicActions.loadLikeList()),
+        payMusic:(data)=>dispatch(musicActions.playMusic(data)),
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(injectStyle(styles)(MusicPage))

@@ -10,7 +10,6 @@ export const  musicState = new Record({
 export function musicReducer(state = new musicState(), {payload, type}) {
     switch (type) {
         case musicActions.MUSIC_DATA_UPDATE:
-            console.log(payload)
             return state.merge({
                 ...payload
             });

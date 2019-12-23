@@ -27,7 +27,16 @@ export async function getSongDetailList(ids) {
 
 export async function getSongUrl(id) {
     try {
-        let res = await axios.get("/music//song/url?",{params:{id:id}});
+        let res = await axios.get("/music/song/url?",{params:{id:id}});
+        return res.data
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export async function getLyric(id){
+    try {
+        let res = await axios.get("/music/lyric?",{params:{id:id}});
         return res.data
     } catch (err) {
         console.log(err)
