@@ -14,10 +14,10 @@ class MusicPlayer extends Component {
         }
     }
 
-    onClickPlayMusic = (songId) => {
+    onClickPlayMusic = (item) => {
         let musicAudio = this.musicAudio.current;
         this.props.onPlayMusic({
-            id: songId, callback: (musicInfo) => {
+            id: item.id, callback: (musicInfo) => {
                 musicAudio.onplaying = null;  //  清除audio标签绑定的事件
                 musicAudio.src = musicInfo.songUrl;
                 if (musicAudio.paused) {
@@ -32,6 +32,7 @@ class MusicPlayer extends Component {
                 })
             }
         });
+        this.props.onSelectMusic({currentPlayItem:item})
     };
 
     render() {
@@ -51,7 +52,7 @@ class MusicPlayer extends Component {
                     <hr/>
                     {
                         songList.map(item => {
-                            return <SongItem key={item.id} onClickPlay={()=>this.onClickPlayMusic(item.id)} songItem={item}/>
+                            return <SongItem key={item.id} onClickPlay={()=>this.onClickPlayMusic(item)} songItem={item}/>
                         })
                     }
                 </div>
@@ -61,14 +62,14 @@ class MusicPlayer extends Component {
                              style={{backgroundImage: `url(${songbg})`, backgroundSize: " 100% 100%"}}>
                             <div className={classes.imgWrapper}>
                                 <img className={classes.imageStyle} alt={"歌手"}
-                                     src={currentPlayItem.picUrl + "?param=200y200"}/>
+                                     src={currentPlayItem.picUrl + "?param=100y100"}/>
                             </div>
                         </div>
                     </div>
                     <div className={classes.process}>
                         <div className={classes.controlBtn}>
                             <div>上一曲</div>
-                            <div onClick={() => this.onClickPlayMusic(currentPlayItem.id)}>播放</div>
+                            <div onClick={() => this.onClickPlayMusic(currentPlayItem)}>播放</div>
                             <div>下一曲</div>
                         </div>
                     </div>
@@ -89,7 +90,8 @@ class MusicPlayer extends Component {
 MusicPlayer.propTypes = {
     songList: PropTypes.array,
     currentPlayItem: PropTypes.object,
-    onPlayMusic: PropTypes.func
+    onPlayMusic: PropTypes.func,
+    onSelectMusic:PropTypes.func
 };
 const styles = {
     mainPanel: {
