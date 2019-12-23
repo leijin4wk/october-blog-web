@@ -2,16 +2,42 @@ import React, {Component} from 'react';
 import injectStyle from 'react-jss'
 import SongItem from "./SongItem";
 import songbg from "../../assets/songbg.png";
+import {getLyricArr} from "../../utils/stringUtil"
 import PropTypes from "prop-types";
 
 class MusicPlayer extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.musicAudio = React.createRef();
+        this.state={
+            lyricArr:[]
+        }
     }
+
+    onClickPlayMusic = () => {
+        let {currentPlayItem} = this.props;
+        let musicAudio = this.musicAudio.current;
+        this.props.onPlayMusic({
+            id: currentPlayItem.id, callback: (musicInfo) => {
+                musicAudio.onplaying = null;  //  清除audio标签绑定的事件
+                musicAudio.src = musicInfo.songUrl;
+                if (musicAudio.paused) {
+                    musicAudio.play();
+                } else {
+                    musicAudio.pause();
+                }
+                //歌词
+                let result = getLyricArr(musicInfo.lyric);
+                this.setState({
+                    lyricArr:result
+                })
+            }
+        });
+    };
+
     render() {
-        console.log( this.musicAudio);
-        let {classes,songList,currentPlayItem} = this.props;
+        let {classes, songList, currentPlayItem} = this.props;
+        let {lyricArr} =this.state;
         return (
             <div className={classes.mainPanel}>
                 <div className={classes.musicListStyle}>
@@ -25,8 +51,8 @@ class MusicPlayer extends Component {
                     </div>
                     <hr/>
                     {
-                        songList.map(item=>{
-                           return  <SongItem key={item.id} songItem={item}/>
+                        songList.map(item => {
+                            return <SongItem key={item.id} songItem={item}/>
                         })
                     }
                 </div>
@@ -36,27 +62,35 @@ class MusicPlayer extends Component {
                              style={{backgroundImage: `url(${songbg})`, backgroundSize: " 100% 100%"}}>
                             <div className={classes.imgWrapper}>
                                 <img className={classes.imageStyle} alt={"歌手"}
-                                     src={currentPlayItem.picUrl+"?param=200y200"}/>
+                                     src={currentPlayItem.picUrl + "?param=200y200"}/>
                             </div>
                         </div>
                     </div>
                     <div className={classes.process}>
                         <div className={classes.controlBtn}>
                             <div>上一曲</div>
-                            <div>播放</div>
+                            <div onClick={() => this.onClickPlayMusic()}>播放</div>
                             <div>下一曲</div>
                         </div>
                     </div>
-                    <audio ref={this.musicAudio}></audio>
-                    <div className={classes.lyricList}> lyric</div>
+                    <audio ref={this.musicAudio}/>
+                    <div ref={this.musicLyric} className={classes.lyricList}>
+                        {
+                            lyricArr.map(item=>{
+                                return <div className={classes.lyricItem} key={item[0]} data-time={item[0]}> {item[1]}</div>
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         );
     }
 }
+
 MusicPlayer.propTypes = {
     songList: PropTypes.array,
-    currentPlayItem:PropTypes.object,
+    currentPlayItem: PropTypes.object,
+    onPlayMusic: PropTypes.func
 };
 const styles = {
     mainPanel: {
@@ -107,21 +141,21 @@ const styles = {
     '@keyframes rotation': {
         from: {
             transform: "rotate(0deg)",
-            WebkitTransform:"rotate(0deg)"
+            WebkitTransform: "rotate(0deg)"
         },
         to: {
             transform: "rotate(359deg)",
-            WebkitTransform:"rotate(359deg)"
+            WebkitTransform: "rotate(359deg)"
         }
     },
     imgWrapper: {
-        animationName:"$rotation",
-        animationDuration:"30s",
-        animationTimingFunction:"linear",
-        animationDelay:"1s",
-        animationIterationCount:"infinite",
+        animationName: "$rotation",
+        animationDuration: "30s",
+        animationTimingFunction: "linear",
+        animationDelay: "1s",
+        animationIterationCount: "infinite",
     },
-    process:{
+    process: {
         display: "flex",
         justifyContent: "center",
     },
@@ -129,11 +163,15 @@ const styles = {
         width: "60%",
         display: "flex",
         justifyContent: "space-around",
-        margin: [10,0]
+        margin: [10, 0]
     },
     lyricList: {
         display: "flex",
+        flexDirection:'column',
         justifyContent: "center"
+    },
+    lyricItem:{
+        textAlign: "center"
     }
 };
 export default injectStyle(styles)(MusicPlayer)
