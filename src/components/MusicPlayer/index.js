@@ -14,11 +14,10 @@ class MusicPlayer extends Component {
         }
     }
 
-    onClickPlayMusic = () => {
-        let {currentPlayItem} = this.props;
+    onClickPlayMusic = (songId) => {
         let musicAudio = this.musicAudio.current;
         this.props.onPlayMusic({
-            id: currentPlayItem.id, callback: (musicInfo) => {
+            id: songId, callback: (musicInfo) => {
                 musicAudio.onplaying = null;  //  清除audio标签绑定的事件
                 musicAudio.src = musicInfo.songUrl;
                 if (musicAudio.paused) {
@@ -52,7 +51,7 @@ class MusicPlayer extends Component {
                     <hr/>
                     {
                         songList.map(item => {
-                            return <SongItem key={item.id} songItem={item}/>
+                            return <SongItem key={item.id} onClickPlay={()=>this.onClickPlayMusic(item.id)} songItem={item}/>
                         })
                     }
                 </div>
@@ -69,7 +68,7 @@ class MusicPlayer extends Component {
                     <div className={classes.process}>
                         <div className={classes.controlBtn}>
                             <div>上一曲</div>
-                            <div onClick={() => this.onClickPlayMusic()}>播放</div>
+                            <div onClick={() => this.onClickPlayMusic(currentPlayItem.id)}>播放</div>
                             <div>下一曲</div>
                         </div>
                     </div>

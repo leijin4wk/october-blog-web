@@ -1,7 +1,7 @@
 export function getLyricArr(lyric) {
     if (lyric) {
         let lineArr = lyric.split('\n'); // 歌词以排为界数组
-        let timeReg = /\[\d{2}:\d{2}.\d{2}\]/g;
+        let timeReg = /\[\d{2}:\d{2}.\d{2,3}\]/g;
         let result = [];
         for (let i in lineArr) {
             let time = lineArr[i].match(timeReg);

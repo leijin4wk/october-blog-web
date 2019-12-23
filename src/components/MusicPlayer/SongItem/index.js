@@ -9,7 +9,7 @@ class SongItem extends Component {
         return (
             <div className={classes.songItemStyle}>
                 <div className={classes.songNameStyle}>
-                    <span>{songItem.name}</span><img width={40} alt={"a"} src={palyBtn}/>
+                    <span>{songItem.name}</span><img width={40} alt={"a"} src={palyBtn} onClick={this.props.onClickPlay}/>
                 </div>
                 <div className={classes.songNameStyle}>
                     <span>{songItem.arName}</span>
@@ -19,7 +19,8 @@ class SongItem extends Component {
     }
 }
 SongItem.propTypes = {
-    songItem: PropTypes.object
+    songItem: PropTypes.object,
+    onClickPlay:PropTypes.func
 };
 const styles = {
     songItemStyle: {
