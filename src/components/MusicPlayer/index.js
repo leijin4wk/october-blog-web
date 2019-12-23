@@ -5,7 +5,12 @@ import songbg from "../../assets/songbg.png";
 import PropTypes from "prop-types";
 
 class MusicPlayer extends Component {
+    constructor(props){
+        super(props);
+        this.musicAudio = React.createRef();
+    }
     render() {
+        console.log( this.musicAudio);
         let {classes,songList,currentPlayItem} = this.props;
         return (
             <div className={classes.mainPanel}>
@@ -42,6 +47,7 @@ class MusicPlayer extends Component {
                             <div>下一曲</div>
                         </div>
                     </div>
+                    <audio ref={this.musicAudio}></audio>
                     <div className={classes.lyricList}> lyric</div>
                 </div>
             </div>
