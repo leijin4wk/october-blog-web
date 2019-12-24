@@ -9,6 +9,7 @@ class MusicPlayer extends Component {
     constructor(props) {
         super(props);
         this.musicAudio = React.createRef();
+        this.musicLyric=React.createRef();
         this.state={
             lyricArr:[]
         }
@@ -29,6 +30,22 @@ class MusicPlayer extends Component {
                 let result = getLyricArr(musicInfo.lyric);
                 this.setState({
                     lyricArr:result
+                },()=>{
+                   let lyricsLiArr=this.musicLyric.current.getElementsByTagName('div');
+                    setInterval(function(){
+                        if (lyricsLiArr) {
+                            for (let i = 0, len = lyricsLiArr.length-1; i < len; i++) {
+                                let curT = lyricsLiArr[i].getAttribute('data-time');
+                                let nexT = lyricsLiArr[i+1].getAttribute('data-time');
+                                let curtTime = musicAudio.currentTime;
+                                if ((curtTime > curT) && (curtTime < nexT)) {
+                                    lyricsLiArr[i].className = 'active';
+                                } else {
+                                    lyricsLiArr[i].className = '';
+                                }
+                            }
+                        }
+                    }, 300);
                 })
             }
         });
