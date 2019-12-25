@@ -35,7 +35,7 @@ const styles = {
     },
     '@media (min-width:1000px)': {
         mainContent: {
-            width: "75%",
+            width: "60%",
         }
     },
     '@media (max-width:1000px)': {
