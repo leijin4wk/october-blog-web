@@ -14,7 +14,7 @@ class IndexPage extends Component {
         super(props);
         this.state={
            titleObj:{
-               name:"雷金的博客",
+               name:"网络日记",
                description:"记录点滴，见证成长"
 
            }
