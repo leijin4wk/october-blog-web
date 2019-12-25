@@ -12,7 +12,7 @@ class MusicPage extends Component {
         this.state={
             titleObj:{
                 name:"音乐",
-                description:"cccc"
+                description:"来自网易云音乐的收藏"
             }
         }
     }
