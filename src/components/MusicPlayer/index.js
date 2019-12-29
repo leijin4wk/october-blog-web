@@ -71,7 +71,7 @@ class MusicPlayer extends Component {
                         songList.map(item => {
                             return <div className={classes.songItemStyle}>
                                 <div className={classes.songNameStyle}>
-                                    <span>{item.name}</span><img width={40} alt={"a"} src={playBtn} onClick={this.onClickPlayMusic}/>
+                                    <span>{item.name}</span><img width={40} alt={"a"} src={playBtn} onClick={()=>this.onClickPlayMusic(item)}/>
                                 </div>
                                 <div className={classes.songNameStyle}>
                                     <span>{item.arName}</span>
