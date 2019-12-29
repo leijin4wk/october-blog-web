@@ -1,37 +1,15 @@
 import {musicActions} from './action';
-import {call, fork, put, take, select} from 'redux-saga/effects';
+import {call, fork, put, take} from 'redux-saga/effects';
 import {showLoading, hideLoading} from 'react-redux-loading-bar'
-import {getMusicCookie, getLikeList, getSongDetailList, getSongUrl,getLyric} from './service'
+import { getLikeList,  getSongUrl} from './service'
 
 function* loadLikeListData() {
     try {
         yield put(showLoading());
-        let {accountId} = yield select(state => state.music);
-        if (accountId === "") {
-            let data = yield call(getMusicCookie);
-            accountId = data;
-            yield put(musicActions.dataUpdate({
-                accountId: data
-            }));
-        }
-        let likeListData = yield call(getLikeList, accountId);
-        let detailListData = yield call(getSongDetailList, likeListData.ids.join(","));
-        let songsList = [];
-        detailListData.songs.forEach(item => {
-            let arList = [];
-            item.ar.forEach(i => {
-                arList.push(i.name)
-            });
-            songsList.push({
-                id: item.id,
-                name: item.name,
-                arName: arList.join(","),
-                picUrl: item.al.picUrl
-            })
-        });
+        let likeListData = yield call(getLikeList);
         yield put(musicActions.dataUpdate({
-            likeList: songsList,
-            currentPlayItem: songsList[0]
+            likeList: likeListData,
+            currentPlayItem: likeListData[0]
         }));
     } catch (error) {
         console.log(error)
@@ -42,15 +20,13 @@ function* loadLikeListData() {
 
 function* playMusic(data) {
     let songUrlData = yield call(getSongUrl, data.id);
-    let lyricData= yield call(getLyric,data.id);
     let result={
-        songUrl:songUrlData.data[0].url,
-        lyric:lyricData.lrc.lyric
+        songUrl:songUrlData.musicUrl,
+        lyric:songUrlData.lyric
     };
     if(data.callback&&typeof data.callback === 'function'){
         data.callback(result)
     }
-
 }
 
 //=====================================

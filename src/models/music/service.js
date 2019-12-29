@@ -1,43 +1,17 @@
 import axios from 'axios'
-export async function getMusicCookie() {
+export async function getLikeList() {
     try {
-        let res = await axios.get("/api/music/getCookie");
+        let res = await axios.get("/api/music/getLikeList");
         return res.data.data
     } catch (err) {
         console.log(err)
     }
 }
-export async function getLikeList(accountId) {
-    try {
-        let res = await axios.get("/music/likelist",{params:{uid:accountId}});
-        return res.data
-    } catch (err) {
-        console.log(err)
-    }
-}
 
-export async function getSongDetailList(ids) {
+export async function getSongUrl(ids) {
     try {
-        let res = await axios.get("/music/song/detail?",{params:{ids:ids}});
-        return res.data
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-export async function getSongUrl(id) {
-    try {
-        let res = await axios.get("/music/song/url?",{params:{id:id}});
-        return res.data
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-export async function getLyric(id){
-    try {
-        let res = await axios.get("/music/lyric?",{params:{id:id}});
-        return res.data
+        let res = await axios.get("/api/music/getSongUrl?",{params:{id:ids}});
+        return res.data.data
     } catch (err) {
         console.log(err)
     }

@@ -8,14 +8,5 @@ module.exports = function (app) {
         pathRewrite: {
             "^/api": "/api"
         },
-
-    }));
-    app.use(proxy('/music', {
-        target: 'https://www.octlr.com',
-        secure: false,
-        changeOrigin: true,
-        pathRewrite: {
-            "^/music": "/music"
-        },
     }));
 };
