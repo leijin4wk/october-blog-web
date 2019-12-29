@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import injectStyle from 'react-jss'
-import SongItem from "./SongItem";
+import playBtn from '../../assets/play.png'
 import songbg from "../../assets/songbg.png";
 import {getLyricArr} from "../../utils/stringUtil"
 import PropTypes from "prop-types";
@@ -69,7 +69,14 @@ class MusicPlayer extends Component {
                     <hr/>
                     {
                         songList.map(item => {
-                            return <SongItem key={item.id} onClickPlay={()=>this.onClickPlayMusic(item)} songItem={item}/>
+                            return <div className={classes.songItemStyle}>
+                                <div className={classes.songNameStyle}>
+                                    <span>{item.name}</span><img width={40} alt={"a"} src={playBtn} onClick={this.onClickPlayMusic}/>
+                                </div>
+                                <div className={classes.songNameStyle}>
+                                    <span>{item.arName}</span>
+                                </div>
+                            </div>
                         })
                     }
                 </div>
@@ -127,6 +134,17 @@ const styles = {
         alignItems: "center",
         justifyContent: "space-around",
         margin: [10, 0]
+    },
+    songItemStyle: {
+        display: "flex",
+        justifyContent: "space-around",
+        margin:[5,0]
+    },
+    songNameStyle:{
+        width:"60%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around"
     },
     player: {
         width: "60%",
