@@ -3,7 +3,6 @@ import { musicActions } from './action';
 
 export const  musicState = new Record({
     likeList:[],
-    accountId:"",
     currentPlayItem:{}
 });
 
