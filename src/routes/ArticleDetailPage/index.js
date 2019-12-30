@@ -3,13 +3,14 @@ import injectStyle from 'react-jss'
 import {connect} from 'react-redux';
 import DetailHeader from '../../components/DetailHeader'
 import Footer from '../../components/Footer'
-import ReactMarkdown from 'react-markdown'
+import MarkdownItem from '../../components/MarkdownItem'
 import {articleDetailActions} from "../../models/articleDetail/action";
 import Navigation from "../../components/Navigation";
 class ArticleDetailPage extends Component {
     componentDidMount() {
         let {params} = this.props.match;
         this.props.loadArticle(params);
+
     }
     render() {
         let {classes,articleItem} = this.props;
@@ -18,7 +19,7 @@ class ArticleDetailPage extends Component {
                 <Navigation/>
                 <DetailHeader item={articleItem}/>
                 <div className={classes.mainContent}>
-                    <ReactMarkdown source={articleItem.content} />
+                    <MarkdownItem articleContent={articleItem.content}/>
                 </div>
                 <Footer/>
             </div>
